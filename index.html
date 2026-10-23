@@ -1396,6 +1396,21 @@
   .ip-logo{height:22px;width:auto;display:block}
   [data-theme="dark"] .ip-logo .ip-1,[data-theme="dark"] .ip-logo .ip-2,[data-theme="dark"] .ip-logo .ip-4{fill:#d8dcf5}
   [data-theme="dark"] .ip-logo .ip-3{fill:var(--color-surface)}
+  /* only the app card is left in the footer row: center it */
+  .site-foot .cta-row{display:flex;justify-content:center;margin-bottom:var(--space-7)}
+  .site-foot .install-card{width:100%;max-width:420px;margin-inline:auto}
+  /* app icon: light tile like the real icon (also in dark mode), stripes slide in once, shine sweeps, stripes fan on hover */
+  .ip-tile{width:76px;height:76px;border-radius:20px;background:#ECF0F3;display:flex;align-items:center;justify-content:center}
+  [data-theme="dark"] .ip-tile{box-shadow:6px 6px 14px rgba(0,0,0,.45),-4px -4px 10px rgba(255,255,255,.05)}
+  .ip-tile svg{overflow:visible}
+  .ip-tile path{transform-box:fill-box;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+  .ip-tile.wait path{opacity:0;transform:translateX(-10px)}
+  .ip-tile.go path{animation:ipIn .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*80ms)}
+  @keyframes ipIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+  .ip-tile .app-shine{background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%)}
+  @media(hover:hover){.install-card:hover .ip-tile{transform:translateY(-4px) scale(1.04)}
+    .install-card:hover .ip-tile path{transform:translateX(calc((var(--i) - 2.5) * 1.1px))}}
+  @media(prefers-reduced-motion:reduce){.ip-tile.wait path{opacity:1;transform:none}.ip-tile.go path{animation:none}.ip-tile path{transition:none}}
   .xlinks{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 4px}
   a.prog-chip{text-decoration:none}
   .pl-h,.pl-item{scroll-margin-top:84px}
@@ -1826,8 +1841,8 @@
       <div class="cta-row" id="community">
       <div class="cta-card install-card">
         <div class="dc-lbl" id="inLbl">App</div>
-        
-                <h2 class="dc-head hx" id="inHead">Installér som app</h2>
+        <div class="app-ico" aria-hidden="true"><div class="app-tile ip-tile"><svg viewBox="61.1 81.65 50 50" width="52" height="52" focusable="false"><path style="--i:1" fill="#3b338b" d="M64.19,94.66c-1.4,2.52-2.37,5.31-2.82,8.27l49.44,2.67c-.04-1.02-.15-2.02-.31-3.01-4.86-.08-9.68-.3-14.24-.72-10.98-1.06-21.69-2.97-32.07-7.2Z"></path><path style="--i:0" fill="#312d71" d="M110.08,100.55c-.25-.97-.55-1.92-.91-2.84-12.57-1.2-24.86-4.92-34.66-13.12-2.28,1.19-4.35,2.71-6.15,4.52,7.2,3.76,15.13,6.25,23.09,8.12,5.97,1.47,12.28,2.53,18.63,3.32Z"></path><path style="--i:4" fill="#312d71" d="M68.36,124.21c1.79,1.8,3.87,3.32,6.14,4.51,9.43-7.92,21.49-11.67,33.45-13,.41-.04.81-.08,1.22-.12.36-.92.66-1.86.91-2.83-6.35.79-12.65,1.84-18.63,3.32-7.96,1.87-15.89,4.37-23.1,8.12Z"></path><path style="--i:3" fill="#2b2e5b" d="M91.1,124.37c-3.44,1.86-6.71,4.13-9.61,6.75,1.46.27,2.95.41,4.48.41,9.6,0,17.94-5.47,22.08-13.45-5.91,1.42-11.64,3.44-16.96,6.29Z"></path><path style="--i:5" fill="#3b338b" d="M64.19,118.67c10.38-4.24,21.09-6.15,32.07-7.2,4.55-.43,9.38-.64,14.24-.72.16-.98.27-1.99.31-3.01l-49.44,2.67c.45,2.96,1.42,5.75,2.82,8.27Z"></path><path style="--i:2" fill="#2b2e5b" d="M91.1,88.95c5.32,2.85,11.05,4.87,16.96,6.29-4.15-7.98-12.49-13.45-22.08-13.45-1.53,0-3.03.15-4.48.41,2.91,2.63,6.18,4.9,9.61,6.75Z"></path></svg><span class="app-shine"></span></div><div class="app-name">Cessatech A/S Portal</div></div>
+        <h2 class="dc-head hx" id="inHead">Installér som app</h2>
         <div class="dc-line" id="inLine">Føj siden til din hjemmeskærm, og åbn den som en app.</div>
         <button class="discord-btn" id="inBtn" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
@@ -3500,6 +3515,10 @@
 </script>
 
 
+<script>/* app icon: stripes slide in the first time the card is seen */
+(function(){const t=document.querySelector('.ip-tile'); if(!t||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)) return;
+  t.classList.add('wait'); const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ t.classList.remove('wait'); t.classList.add('go'); io.disconnect(); } },{threshold:.6}); io.observe(t);})();
+</script>
 <script>/* deal chip -> open the program in the pipeline */
 document.addEventListener('click',e=>{const a=e.target.closest('a[data-open]'); if(!a) return; e.preventDefault();
   const row=document.getElementById('plb-'+a.dataset.open); if(!row) return;
@@ -3521,10 +3540,12 @@ document.addEventListener('click',e=>{const a=e.target.closest('a[data-open]'); 
     en:{h:'May we measure visits?',p:'We use Google Analytics to see which parts of the page are read, so we can improve it. It sets cookies and sends data to Google. Nothing happens until you say yes.',yes:'Accept',no:'Decline',more:'Read more',set:'Cookie settings'}};
   const read=()=>{try{const c=JSON.parse(localStorage.getItem(KEY)||'null'); return c&&Date.now()-c.t<YEAR?c.v:null;}catch(e){return null;}};
   const save=v=>{try{localStorage.setItem(KEY,JSON.stringify({v,t:Date.now()}));}catch(e){}};
+  const PREVIEW=GA_ID==='PREVIEW'; // review build: banner works, nothing is loaded or sent
   let on=false;
   window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);}
   function start(){
     if(on) return; on=true;
+    if(PREVIEW){ initEvents(); return; }
     gtag('consent','default',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
     gtag('js',new Date());
     gtag('config',GA_ID,{content_group:L(),page_language:L(),allow_google_signals:false,allow_ad_personalization_signals:false});
@@ -3535,7 +3556,7 @@ document.addEventListener('click',e=>{const a=e.target.closest('a[data-open]'); 
     document.cookie.split(';').forEach(c=>{const n=c.split('=')[0].trim(); if(/^_ga/.test(n)){ ['',location.hostname,'.'+location.hostname].forEach(d=>{document.cookie=n+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'+(d?';domain='+d:'');}); }});
     if(on) location.reload();
   }
-  const track=(name,p)=>{ if(on) gtag('event',name,Object.assign({page_language:L()},p||{})); };
+  const track=(name,p)=>{ if(!on) return; const d=Object.assign({page_language:L()},p||{}); if(PREVIEW){ window.ciPreviewLog&&window.ciPreviewLog(name,d); return; } gtag('event',name,d); };
   window.ciTrack=track;
 
   /* ---------- banner ---------- */
