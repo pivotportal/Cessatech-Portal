@@ -1,0 +1,68 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Cessatech A/S Portal//Calendar//DA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Cessatech A/S Portal: kalender
+X-WR-TIMEZONE:Europe/Copenhagen
+X-WR-CALDESC:Uafhængigt overblik over Cessatechs kommende datoer. Ikke inv
+ esteringsrådgivning.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VTIMEZONE
+TZID:Europe/Copenhagen
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:2026-11-26-q3@cessatech-portal.vercel.app
+DTSTAMP:20261126T000000Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261127
+TRANSP:TRANSPARENT
+SUMMARY:Cessatech: delårsrapport Q3 2026
+DESCRIPTION:Dato ifølge Cessatechs finanskalender. Klokkeslæt ikke oplyst
+ .\nhttps://cessatech.com/wp-content/uploads/2026/08/Q2_2026-Report.pdf#pag
+ e=8
+URL:https://cessatech.com/wp-content/uploads/2026/08/Q2_2026-Report.pdf#pag
+ e=8
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-26-ar@cessatech-portal.vercel.app
+DTSTAMP:20270226T000000Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+TRANSP:TRANSPARENT
+SUMMARY:Cessatech: Q4-rapport og årsrapport 2026
+DESCRIPTION:Dato ifølge Cessatechs finanskalender. Klokkeslæt ikke oplyst
+ .\nhttps://cessatech.com/wp-content/uploads/2026/08/Q2_2026-Report.pdf#pag
+ e=8
+URL:https://cessatech.com/wp-content/uploads/2026/08/Q2_2026-Report.pdf#pag
+ e=8
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-30-agm@cessatech-portal.vercel.app
+DTSTAMP:20270330T000000Z
+DTSTART;VALUE=DATE:20270330
+DTEND;VALUE=DATE:20270331
+TRANSP:TRANSPARENT
+SUMMARY:Cessatech: ordinær generalforsamling 2027
+DESCRIPTION:Dato ifølge Q2-rapporten 2026. Indkaldelse og sted meddeles af
+  selskabet.\nhttps://cessatech.com/wp-content/uploads/2026/08/Q2_2026-Repo
+ rt.pdf#page=8
+URL:https://cessatech.com/wp-content/uploads/2026/08/Q2_2026-Report.pdf#pag
+ e=8
+END:VEVENT
+END:VCALENDAR
